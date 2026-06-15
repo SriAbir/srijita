@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Srijita Basu — Software Security &amp; Agentic AI</title>
+<meta name="description" content="Srijita Basu — postdoctoral researcher in software security and agentic AI at Chalmers University of Technology and the University of Gothenburg." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --paper:    #f6f6f2;
+    --paper-2:  #eeeee7;
+    --ink:      #1b1c1e;
+    --muted:    #5c5e62;
+    --hair:     #d6d6cd;
+    --accent:   #3a5a66;
+    --accent-d: #294149;
+
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+    --mono:  "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+    --measure: 720px;
+    --gap: clamp(3.5rem, 7vw, 6rem);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 19px;
+    line-height: 1.6;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: var(--accent-d); }
+
+  .link {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size .25s ease;
+    padding-bottom: 1px;
+  }
+  .link:hover { background-size: 100% 1px; }
+
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 1px; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: .72rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    margin: 0 0 1.4rem 0;
+    display: flex;
+    align-items: center;
+    gap: .9rem;
+  }
+  .eyebrow::after { content: ""; flex: 1; height: 1px; background: var(--hair); }
+
+  .wrap { width: 100%; max-width: var(--measure); margin: 0 auto; padding: 0 1.5rem; }
+
+  section { padding: var(--gap) 0; }
+  section + section { border-top: 1px solid var(--hair); }
+
+  h1, h2, h3 { font-weight: 500; line-height: 1.15; margin: 0; }
+
+  /* nav */
+  .nav {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: saturate(120%) blur(8px);
+    border-bottom: 1px solid var(--hair);
+  }
+  .nav-inner {
+    max-width: var(--measure); margin: 0 auto; padding: .85rem 1.5rem;
+    display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+  }
+  .nav-name { font-size: 1.02rem; font-weight: 600; letter-spacing: .01em; }
+  .nav-links {
+    display: flex; gap: 1.4rem;
+    font-family: var(--mono); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
+  }
+  .nav-links a { color: var(--muted); }
+  .nav-links a:hover { color: var(--ink); }
+  @media (max-width: 680px) { .nav-links { display: none; } }
+
+  /* hero */
+  .hero { padding: clamp(4rem, 12vh, 8rem) 0 var(--gap); }
+  .hero-meta {
+    font-family: var(--mono); font-size: .74rem; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 1.6rem;
+  }
+  .hero h1 {
+    font-size: clamp(2.9rem, 8vw, 4.6rem); font-weight: 500;
+    letter-spacing: -0.015em; margin-bottom: 1.1rem;
+  }
+  .hero-lede {
+    font-size: clamp(1.25rem, 3vw, 1.55rem); font-style: italic; color: var(--ink);
+    max-width: 32ch; margin: 0 0 2rem; line-height: 1.4;
+  }
+  .hero-affil { color: var(--muted); margin: 0 0 2.4rem; max-width: 54ch; }
+  .hero-affil strong { color: var(--ink); font-weight: 600; }
+
+  .hero-rule { border: 0; border-top: 1px solid var(--accent); margin: 0 0 1.6rem; max-width: 4rem; }
+
+  .links-row {
+    display: flex; flex-wrap: wrap; gap: .5rem 1.6rem;
+    font-family: var(--mono); font-size: .8rem; letter-spacing: .04em;
+  }
+  .links-row a { display: inline-flex; align-items: center; gap: .4rem; }
+  .links-row a::before { content: "→"; color: var(--accent); }
+
+  /* about */
+  .about-grid { display: grid; grid-template-columns: 1fr; gap: 2.4rem; }
+  @media (min-width: 760px) { .about-grid { grid-template-columns: 1.6fr 1fr; gap: 3rem; } }
+  .about-body p { margin: 0 0 1.1rem; }
+  .about-body p:last-child { margin-bottom: 0; }
+
+  .facts { font-size: .92rem; align-self: start; }
+  .facts dl { margin: 0; display: grid; gap: 1.1rem; }
+  .facts dt {
+    font-family: var(--mono); font-size: .68rem; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: .25rem;
+  }
+  .facts dd { margin: 0; color: var(--ink); }
+
+  .portrait {
+    width: 100%; aspect-ratio: 4 / 5; background: var(--paper-2);
+    border: 1px solid var(--hair); margin-bottom: 1.6rem; overflow: hidden;
+  }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* research */
+  .research-list { display: grid; gap: 2.2rem; }
+  .research-item h3 { font-size: 1.32rem; margin-bottom: .5rem; }
+  .research-item h3 .tag {
+    font-family: var(--mono); font-size: .64rem; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--accent); vertical-align: middle; margin-left: .7rem;
+  }
+  .research-item p { margin: 0; color: var(--muted); }
+
+  /* publications */
+  .pub-group {
+    font-family: var(--mono); font-size: .74rem; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--muted); margin: 2.6rem 0 .4rem;
+  }
+  .pub-group:first-child { margin-top: 0; }
+
+  .pub { display: grid; gap: .2rem; padding: 1rem 0; border-top: 1px solid var(--hair); }
+  .pub-title { font-size: 1.06rem; line-height: 1.4; }
+  .pub-authors { color: var(--muted); font-size: .94rem; }
+  .pub-authors .me { color: var(--ink); font-weight: 600; }
+  .pub-venue { font-style: italic; color: var(--muted); font-size: .94rem; }
+  .pub-tags { margin-top: .35rem; display: flex; gap: 1rem; font-family: var(--mono); font-size: .72rem; }
+
+  /* line lists */
+  .line-list { display: grid; gap: 1.1rem; }
+  .line { display: grid; grid-template-columns: 6.5rem 1fr; gap: 1.2rem; align-items: baseline; }
+  .line .when {
+    font-family: var(--mono); font-size: .74rem; letter-spacing: .06em;
+    color: var(--muted); padding-top: .15rem;
+  }
+  .line .what { margin: 0; }
+  .line .what strong { font-weight: 600; }
+  .line .what span { display: block; color: var(--muted); font-size: .94rem; }
+  @media (max-width: 520px) { .line { grid-template-columns: 1fr; gap: .2rem; } }
+
+  .prose p { margin: 0 0 1.1rem; }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose .courses { color: var(--muted); }
+
+  /* contact */
+  .contact p { margin: 0 0 1.4rem; max-width: 48ch; color: var(--muted); }
+  .contact .email { font-size: clamp(1.4rem, 4vw, 2rem); font-style: italic; }
+  footer { border-top: 1px solid var(--hair); padding: 2.2rem 0 3rem; }
+  .colophon {
+    font-family: var(--mono); font-size: .7rem; letter-spacing: .08em; color: var(--muted);
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: .8rem;
+  }
+
+  /* reveal */
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-name">Srijita Basu</span>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#teaching">Teaching</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-meta">Postdoctoral Researcher · Software Security &amp; Agentic AI</div>
+      <h1>Srijita Basu</h1>
+      <p class="hero-lede">I design AI agents that find and fix security vulnerabilities in safety-critical software — from connected vehicles to the cloud.</p>
+      <p class="hero-affil">
+        Postdoctoral Researcher, Software Engineering Unit,
+        <strong>Chalmers University of Technology &amp; University of Gothenburg</strong>.
+        Currently on the academic job market.
+      </p>
+      <hr class="hero-rule" />
+      <div class="links-row">
+        <a class="link" href="mailto:srijita@chalmers.se">Email</a>
+        <a class="link" href="Srijita_Basu_CV.pdf">CV (PDF)</a>
+        <a class="link" href="https://scholar.google.com/citations?user=Af_IYesAAAAJ&amp;hl=en">Google Scholar</a>
+        <a class="link" href="https://orcid.org/0000-0002-6835-947X">ORCID</a>
+        <a class="link" href="https://dblp.org/pid/185/7998.html">DBLP</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="wrap">
+      <p class="eyebrow">About</p>
+      <div class="about-grid reveal">
+        <div class="about-body">
+          <p>
+            I am a postdoctoral researcher in the Software Engineering Unit at Chalmers
+            University of Technology and the University of Gothenburg, where I study how
+            autonomous AI agents can make safety-critical software more secure. My current
+            work designs role-based, multi-agent workflows that detect, analyse, and help
+            remediate software vulnerabilities, with a particular focus on connected and
+            automotive systems.
+          </p>
+          <p>
+            Over more than nine years I have followed a single thread — the security and
+            verification of complex software — through several domains. My Master's and
+            doctoral research developed blockchain-based smart contracts and formal security
+            models for cloud computing, and I later led two DRDO-funded projects on policy
+            verification and software-defined security for SDN and NFV infrastructures. That
+            trajectory now converges on agentic AI for secure software engineering.
+          </p>
+          <p>
+            My research is closely tied to industry. Through the Software Center and SFO
+            Transport I collaborate with partners including Volvo, Scania, Grundfos, and
+            Ericsson, bringing academic ideas to bear on real engineering problems. I am
+            currently on the academic job market, seeking a faculty position where I can build
+            an independent research program and supervise doctoral students. Outside research
+            I enjoy music, films, and books, and I speak Bengali, English, Hindi, and some German.
+          </p>
+        </div>
+        <aside class="facts">
+          <div class="portrait">
+            <img src="srijita.jpg" alt="Portrait of Srijita Basu" />
+          </div>
+          <dl>
+            <div>
+              <dt>Position</dt>
+              <dd>Postdoctoral Researcher</dd>
+            </div>
+            <div>
+              <dt>Affiliation</dt>
+              <dd>Software Engineering, Chalmers &amp; University of Gothenburg</dd>
+            </div>
+            <div>
+              <dt>Location</dt>
+              <dd>Gothenburg, Sweden</dd>
+            </div>
+            <div>
+              <dt>Scholar</dt>
+              <dd>384 citations · h-index 7</dd>
+            </div>
+            <div>
+              <dt>Interests</dt>
+              <dd>Agentic AI, Software Security, Automotive Software, Blockchain, Cloud Security, SDN</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section id="research">
+    <div class="wrap">
+      <p class="eyebrow">Research</p>
+      <div class="research-list">
+        <article class="research-item reveal">
+          <h3>Agentic AI for Secure Software Engineering <span class="tag">Current</span></h3>
+          <p>
+            I design role-based and multi-agent (Crew-AI) architectures that triage, analyse,
+            and remediate software vulnerabilities, and I study how AI agents collaborate — and
+            miscommunicate — when given real software-engineering tasks.
+          </p>
+        </article>
+        <article class="research-item reveal">
+          <h3>Automotive Software Security</h3>
+          <p>
+            Mapping the vulnerability landscape of connected vehicles through architectural
+            studies of the AUTOSAR Adaptive Platform and automotive system-on-chip software,
+            carried out with partners in the Swedish transport sector.
+          </p>
+        </article>
+        <article class="research-item reveal">
+          <h3>Blockchain &amp; Cloud Security</h3>
+          <p>
+            My doctoral work built blockchain-based smart contracts and formal models for
+            decentralised policy enforcement, secure cloud data location and deletion, and
+            virtual-machine image integrity using Hyperledger and Ethereum.
+          </p>
+        </article>
+        <article class="research-item reveal">
+          <h3>Software-Defined Network Security <span class="tag">DRDO-funded</span></h3>
+          <p>
+            As a research lead I built tools that verify security-policy compliance across SDN
+            and NFV infrastructures, together with a software-defined security framework for
+            managing network and security state dynamically.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="publications">
+    <div class="wrap">
+      <p class="eyebrow">Publications</p>
+      <div class="reveal">
+
+        <p class="pub-group">Journal Articles</p>
+
+        <article class="pub">
+          <span class="pub-title">Mapping the Landscape of Software Vulnerabilities in Connected Vehicles</span>
+          <span class="pub-authors"><span class="me">Srijita Basu</span>, Miroslaw Staron, Magnus Almgren, Jennifer Horkoff &amp; Christian Berger</span>
+          <span class="pub-venue">Software Quality Journal (accepted)</span>
+        </article>
+
+        <article class="pub">
+          <span class="pub-title">Detection and Intelligent Control of Cloud Data Location using Hyperledger Framework</span>
+          <span class="pub-authors"><span class="me">Srijita Basu</span>, Sandip Karmakar &amp; Debasish Bera</span>
+          <span class="pub-venue">IEEE Transactions on Consumer Electronics, 69(1), 76–86, 2023</span>
+          <span class="pub-tags"><a class="link" href="https://doi.org/10.1109/TCE.2022.3201932">DOI</a></span>
+        </article>
+
+        <article class="pub">
+          <span class="pub-title">Securing Cloud Virtual Machine Image using Ethereum Blockchain</span>
+          <span class="pub-authors"><span class="me">Srijita Basu</span>, Debasish Bera &amp; Sandip Karmakar</span>
+          <span class="pub-venue">International Journal of Information Security and Privacy, 16(1), 1–22, 2022</span>
+        </article>
+
+        <article class="pub">
+          <span class="pub-title">Modeling Operations and Security of Cloud Systems using Z-notation and Chinese Wall Security Policy</span>
+          <span class="pub-authors"><span class="me">Srijita Basu</span>, Anirban Sengupta &amp; Chandan Mazumdar</span>
+          <span class="pub-venue">Enterprise Information Systems, Taylor &amp; Francis, 2016</span>
+          <span class="pub-tags"><a class="link" href="https://doi.org/10.1080/17517575.2016.1183264">DOI</a></span>
+        </article>
+
+        <p class="pub-group">Conference &amp; Workshop Papers</p>
+
+        <article class="pub">
+          <span class="pub-title">Security in a Workflow: Exploring Role-Based Agentic Architectures for Vulnerability Handling</span>
+          <span class="pub-authors"><span class="me">Srijita Basu</span> &amp; Miroslaw Staron</span>
+          <span class="pub-venue">52nd Euromicro Conference on Software Engineering and Advanced Applications (SEAA), 2026 (accepted)</span>
+        </article>
+
+        <article class="pub">
+          <span class="pub-title">Understanding Conversational Patterns in Multi-Agent Programming: A Case Study on Fibonacci Game Development</span>
+          <span class="pub-authors"><span class="me">Srijita Basu</span>, Viktor Kjellberg, Wilhelm Meding, Simin Sun, Bengt Haraldsson, Farnaz Fotrousi, Md. Abu Ahammed Babu &amp; Miroslaw Staron</span>
+          <span class="pub-venue">FSE — AIware, 2026 (accepted)</span>
+        </article>
+
+        <article class="pub">
+          <span class="pub-title">An Investigation of the AUTOSAR Adaptive Platform from an Industry Perspective</span>
+          <span class="pub-authors">Bengt Haraldsson, <span class="me">Srijita Basu</span>, Erika Mayer &amp; Miroslaw Staron</span>
+          <span class="pub-venue">22nd International Conference on Software Architecture (ICSA), 2026 (accepted)</span>
+        </article>
+
+        <article class="pub">
+          <span class="pub-title">Understanding the Changing Landscape of Automotive Software Vulnerabilities: Insights from a Seven-Year Analysis</span>
+          <span class="pub-authors"><span class="me">Srijita Basu</span> &amp; Miroslaw Staron</span>
+          <span class="pub-venue">IEEE/ACM 3rd International Workshop on Software Vulnerability Management (SVM), 9–16, 2025</span>
+        </article>
+
+        <article class="pub">
+          <span class="pub-title">An AUTOSAR-Aligned Architectural Study of Vulnerabilities in Automotive SoC Software</span>
+          <span class="pub-authors"><span class="me">Srijita Basu</span>, Bengt Haraldsson, Miroslaw Staron, Magnus Almgren, Jennifer Horkoff &amp; Christian Berger</span>
+          <span class="pub-venue">International Conference on the Quality of Information and Communications Technology (QUATIC), 2025</span>
+        </article>
+
+        <article class="pub">
+          <span class="pub-title">Hyperledger-based Verifiable and Secure Cloud Data Deletion</span>
+          <span class="pub-authors"><span class="me">Srijita Basu</span>, Debasish Bera &amp; Sandip Karmakar</span>
+          <span class="pub-venue">IEEE INFOCOM Workshops (INFOCOM WKSHPS), 1–6, 2023</span>
+          <span class="pub-tags"><a class="link" href="https://doi.org/10.1109/INFOCOMWKSHPS57453.2023.10226125">DOI</a></span>
+        </article>
+
+        <article class="pub">
+          <span class="pub-title">A Novel Software Defined Security Framework for SDN</span>
+          <span class="pub-authors"><span class="me">Srijita Basu</span>, Neha Firdaush Raun, Avishek Ghosal, Debanjan Chatterjee, Debarghya Maitra &amp; Chandan Mazumdar</span>
+          <span class="pub-venue">International Conference on Risks and Security of Internet and Systems (CRiSIS), 216–230, Springer</span>
+        </article>
+
+        <article class="pub">
+          <span class="pub-title">Blockchain-based Secured Virtual Machine Image Monitor</span>
+          <span class="pub-authors"><span class="me">Srijita Basu</span>, Sandip Karmakar &amp; Debasish Bera</span>
+          <span class="pub-venue">International Conference on Information Systems Security and Privacy (ICISSP), 432–439, 2021</span>
+        </article>
+
+        <article class="pub">
+          <span class="pub-title">Cloud Computing Security Challenges &amp; Solutions — A Survey</span>
+          <span class="pub-authors"><span class="me">Srijita Basu</span>, Arjun Bardhan, Koyal Gupta, Payel Saha, Mahasweta Pal, Manjima Bose, Kaushik Basu, Saunak Chaudhury &amp; Pritika Sarkar</span>
+          <span class="pub-venue">IEEE 8th Annual Computing and Communication Workshop and Conference (CCWC), 2018</span>
+          <span class="pub-tags"><a class="link" href="https://doi.org/10.1109/CCWC.2018.8301700">DOI</a></span>
+        </article>
+
+        <article class="pub">
+          <span class="pub-title">Secured Task Scheduling in Cloud</span>
+          <span class="pub-authors"><span class="me">Srijita Basu</span> &amp; Abhishek Anand</span>
+          <span class="pub-venue">3rd International Conference on Information and Communication Technology for Intelligent Systems (ICTIS), 2018</span>
+        </article>
+
+        <article class="pub">
+          <span class="pub-title">A Low-Cost Fully Autonomous GPS-based Quadcopter for Disaster Management</span>
+          <span class="pub-authors">Himadri Nath Saha, <span class="me">Srijita Basu</span>, Supratim Auddy, Ratul Dey, Arnab Nandy, Debjit Pal, Nirjhar Roy, Subhadeep Jasu, Ankita Saha, Soummyo Priyo Chattopadhyay &amp; Tamanna Maity</span>
+          <span class="pub-venue">IEEE 8th Annual Computing and Communication Workshop and Conference (CCWC), 2018</span>
+        </article>
+
+        <article class="pub">
+          <span class="pub-title">A Cloud-based Autonomous Multipurpose System with Self-Communicating Bots and Swarm of Drones</span>
+          <span class="pub-authors">Himadri Nath Saha, Nisith K. Das, Susanta K. Pal, <span class="me">Srijita Basu</span>, Supratim Auddy, Ratul Dey, Arnab Nandy, Debjit Pal, Nirjhar Roy, Dipanjan Mitra, Saunak Biswas &amp; Tamanna Maity</span>
+          <span class="pub-venue">IEEE 8th Annual Computing and Communication Workshop and Conference (CCWC), 2018</span>
+        </article>
+
+        <article class="pub">
+          <span class="pub-title">A Quantitative Methodology for Cloud Security Risk Assessment</span>
+          <span class="pub-authors"><span class="me">Srijita Basu</span>, Anirban Sengupta &amp; Chandan Mazumdar</span>
+          <span class="pub-venue">CLOSER — 7th International Conference on Cloud Computing and Services Science, 92–103, 2017</span>
+          <span class="pub-tags"><a class="link" href="https://doi.org/10.5220/0006294401200131">DOI</a></span>
+        </article>
+
+        <article class="pub">
+          <span class="pub-title">An Automated Methodology for Secured User Allocation in Cloud</span>
+          <span class="pub-authors"><span class="me">Srijita Basu</span>, Anirban Sengupta &amp; Chandan Mazumdar</span>
+          <span class="pub-venue">4th International Symposium on Security in Computing and Communications (SSCC), 2016</span>
+        </article>
+
+        <article class="pub">
+          <span class="pub-title">Implementing Chinese Wall Security Model for Cloud-based Services</span>
+          <span class="pub-authors"><span class="me">Srijita Basu</span>, Anirban Sengupta &amp; Chandan Mazumdar</span>
+          <span class="pub-venue">International Conference on Green Computing and Internet of Things (ICGCIoT), 1083–1089, 2015</span>
+          <span class="pub-tags"><a class="link" href="https://doi.org/10.1109/ICGCIoT.2015.7380624">DOI</a></span>
+        </article>
+
+        <p class="pub-group">Book Chapter</p>
+
+        <article class="pub">
+          <span class="pub-title">Deep Learning-Based Autonomous Driving and Cloud Traffic Management System for Smart City</span>
+          <span class="pub-authors">Soujanya Syamal, Joyatee Datta, <span class="me">Srijita Basu</span> &amp; Shuvendu Das</span>
+          <span class="pub-venue">Convergence of IoT, Blockchain, and Computational Intelligence in Smart Cities, 117–135, CRC Press</span>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="teaching">
+    <div class="wrap">
+      <p class="eyebrow">Teaching</p>
+      <div class="prose reveal">
+        <p>
+          I teach in a student-centred, constructivist style: I see myself as a facilitator
+          rather than a lecturer, lean on problem-based learning and frequent formative feedback,
+          and pay close attention to inclusivity and to supporting women in STEM. Across five
+          years as an Assistant Professor and through my current postdoc, I have taught widely
+          across the computer-science curriculum and supervised Bachelor's and Master's theses
+          from proposal through defence.
+        </p>
+        <p>
+          A distinctive part of my teaching is hands-on work with embedded and real-time systems
+          on a live Volvo truck platform, including student hackathons in which teams programmed
+          the vehicle directly. I also design courses around professional tools — version control
+          with GitHub and learning-management workflows in Canvas — so students learn collaboration
+          practices, not just programming.
+        </p>
+        <p class="courses">
+          <strong style="color:var(--ink);font-weight:600;">Courses taught:</strong>
+          Software Evolution · AI &amp; Cybersecurity · Development of Embedded and Real-Time Systems ·
+          Cloud Computing · Information &amp; Network Security · Database Management Systems ·
+          Data Structures &amp; Algorithms · Digital Electronics · Information Theory &amp; Coding ·
+          Object-Oriented Programming in Java
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="background">
+    <div class="wrap">
+      <p class="eyebrow">Experience &amp; Education</p>
+      <div class="line-list reveal">
+        <div class="line">
+          <span class="when">2024 –</span>
+          <p class="what"><strong>Postdoctoral Researcher</strong><span>Software Engineering Unit, Chalmers University of Technology &amp; University of Gothenburg</span></p>
+        </div>
+        <div class="line">
+          <span class="when">2022 – 24</span>
+          <p class="what"><strong>Senior Research Engineer</strong><span>Centre for Distributed Computing, Jadavpur University · DRDO-funded SDN security projects</span></p>
+        </div>
+        <div class="line">
+          <span class="when">2017 – 22</span>
+          <p class="what"><strong>Assistant Professor</strong><span>Institute of Engineering &amp; Management, Kolkata</span></p>
+        </div>
+        <div class="line">
+          <span class="when">2023</span>
+          <p class="what"><strong>PhD, Computer Science</strong><span>Indian Institute of Information Technology, Kalyani — blockchain-based smart contracts for cloud computing</span></p>
+        </div>
+        <div class="line">
+          <span class="when">2016</span>
+          <p class="what"><strong>M.E., Computer Science &amp; Engineering</strong><span>Jadavpur University</span></p>
+        </div>
+        <div class="line">
+          <span class="when">2013</span>
+          <p class="what"><strong>B.Tech, Computer Science &amp; Engineering</strong><span>Govt. College of Engineering &amp; Textile Technology, Serampore</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="service">
+    <div class="wrap">
+      <p class="eyebrow">Service &amp; Community</p>
+      <div class="line-list reveal">
+        <div class="line">
+          <span class="when">Committees</span>
+          <p class="what">Program Committee Member<span>PROFES 2025 · FSE Prompt-SE 2026</span></p>
+        </div>
+        <div class="line">
+          <span class="when">Reviewing</span>
+          <p class="what">Journal Reviewer<span>IEEE Software · Information and Software Technology · Journal of Cloud Computing · IEEE Transactions on Dependable and Secure Computing · CMC</span></p>
+        </div>
+        <div class="line">
+          <span class="when">Talks</span>
+          <p class="what">Presentations &amp; Workshops<span>Swedish Transport Research Conference 2024 · SWITS · BaaS CyberSec · Software Center workshops</span></p>
+        </div>
+        <div class="line">
+          <span class="when">Outreach</span>
+          <p class="what">Workshops &amp; Mentoring<span>AI workshop at Grundfos · Volvo truck programming hackathons · Faculty Advisor, CodeChef Kolkata Chapter (2020–22)</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <p class="eyebrow">Contact</p>
+      <div class="reveal">
+        <p>I'm glad to hear from prospective collaborators, students, and hiring committees.</p>
+        <a class="link email" href="mailto:srijita@chalmers.se">srijita@chalmers.se</a>
+        <div class="links-row" style="margin-top:2rem;">
+          <a class="link" href="Srijita_Basu_CV.pdf">CV (PDF)</a>
+          <a class="link" href="https://scholar.google.com/citations?user=Af_IYesAAAAJ&amp;hl=en">Google Scholar</a>
+          <a class="link" href="https://orcid.org/0000-0002-6835-947X">ORCID</a>
+          <a class="link" href="https://dblp.org/pid/185/7998.html">DBLP</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="colophon">
+      <span>© 2026 Srijita Basu</span>
+      <span>Gothenburg, Sweden</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window) ||
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      els.forEach(function (el) { el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+</script>
+
+</body>
+</html>
